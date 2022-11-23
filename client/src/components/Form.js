@@ -1,9 +1,22 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function Form() {
   const [email, setEmail] = useState();
   const [department, setDepartment] = useState();
   const [courseNumber, setCourseNumber] = useState();
+
+  const peterPortalURL = "https://api.peterportal.org/rest/v0/schedule/soc?";
+  async function getClass() {
+    try {
+      const result = await axios.get(
+        `${peterPortalURL}term=2023 Winter&department=${department}&courseNumber=${courseNumber}`
+      );
+      console.log(result.data.schools[0].departments[0].courses[0].sections);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   function uploadForm(event) {
     event.preventDefault();
@@ -42,7 +55,7 @@ export default function Form() {
           required
         >
           <option value="">--Please choose an option--</option>
-          <option value="I&C SCI">I&C SCI</option>
+          <option value="I%26C SCI ">I&C SCI</option>
           <option value="WRITING">WRITING</option>
           <option value="MATH">MATH</option>
           <option value="ANTHRO">ANTHRO</option>
@@ -58,6 +71,7 @@ export default function Form() {
           Alert Me!
         </button>
       </form>
+      <button onClick={getClass}>PRINT DATA</button>
     </>
   );
 }
