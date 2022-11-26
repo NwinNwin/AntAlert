@@ -62,13 +62,14 @@ export default function AlertForm() {
   return (
     <>
       <div className="alert-form">
-        <Form noValidate validated={validated} onSubmit={uploadForm}>
+        <Form validated={validated} onSubmit={uploadForm}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               onChange={updateEmail}
               type="email"
               placeholder="Enter email"
+              required
             />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
@@ -93,14 +94,14 @@ export default function AlertForm() {
               required
             />
           </Form.Group>
-          <Button variant="success" type="submit">
-            Alert Me!
+          <Button onClick={getClass} variant="success" type="submit">
+            +
           </Button>
         </Form>
 
-        <Button className="mt-3" variant="danger" onClick={getClass}>
+        {/* <Button className="mt-3" variant="danger" onClick={getClass}>
           PRINT DATA
-        </Button>
+        </Button> */}
 
         {/* use Accordion */}
 
