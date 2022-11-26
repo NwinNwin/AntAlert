@@ -3,11 +3,17 @@ import axios from "axios";
 import "./AlertForm.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import ShowClasses from "./ShowClasses";
 
 export default function AlertForm() {
   const [email, setEmail] = useState();
   const [department, setDepartment] = useState();
   const [courseNumber, setCourseNumber] = useState();
+  const [classData, setClassData] = useState([]);
+
+  let listClasses = classData.map((ele) => {
+    return <ShowClasses key={ele.sectionCode} {...ele} />;
+  });
 
   const peterPortalURL = "https://api.peterportal.org/rest/v0/schedule/soc?";
   async function getClass() {
@@ -16,6 +22,7 @@ export default function AlertForm() {
         `${peterPortalURL}term=2023 Winter&department=${department}&courseNumber=${courseNumber}`
       );
       console.log(result.data.schools[0].departments[0].courses[0].sections);
+      setClassData(result.data.schools[0].departments[0].courses[0].sections);
     } catch (err) {
       console.log(err);
     }
@@ -39,10 +46,15 @@ export default function AlertForm() {
     setCourseNumber(event.target.value);
   }
 
+  useEffect(() => {
+    listClasses = classData.map((ele) => {
+      return <ShowClasses {...ele} />;
+    });
+  });
+
   return (
     <>
       <Form onSubmit={uploadForm}>
-        h
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -76,9 +88,12 @@ export default function AlertForm() {
           Alert Me!
         </Button>
       </Form>
+
       <Button variant="danger" onClick={getClass}>
         PRINT DATA
       </Button>
+      {listClasses}
+      {}
     </>
   );
 }
