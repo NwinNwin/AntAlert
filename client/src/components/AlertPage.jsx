@@ -28,6 +28,8 @@ export default function AlertPage({ department, courseNumber, listAlert }) {
     classData.forEach((e) => {
       if (c.sectionCode === e.sectionCode && e.status !== "FULL") {
         alert(`${c.instructors} is OPEN bitch!`);
+      } else if (c.sectionCode === e.sectionCode) {
+        console.log(e.status);
       }
     });
   });
