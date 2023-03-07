@@ -1,6 +1,5 @@
 import "./App.css";
-import Form from "./components/AlertForm";
-import { Button } from "react-bootstrap";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import AlertForm from "./components/AlertForm";
 

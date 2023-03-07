@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./AlertForm.css";
 import Button from "react-bootstrap/Button";
@@ -9,11 +9,11 @@ import AlertPage from "./AlertPage";
 import ListChosenClasses from "./ListChosenClasses";
 
 export default function AlertForm() {
-  const [email, setEmail] = useState();
+  // const [email, setEmail] = useState();
   const [department, setDepartment] = useState();
   const [courseNumber, setCourseNumber] = useState();
   const [classData, setClassData] = useState([]);
-  const [validated, setValidated] = useState(false);
+  let validated = useState(false);
 
   const [listAlert, setListAlert] = useState([]);
 
@@ -38,18 +38,17 @@ export default function AlertForm() {
 
   function uploadForm(event) {
     event.preventDefault();
-    console.log(`${email} ${department} ${courseNumber}`);
   }
 
-  function updateEmail(event) {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    setValidated(true);
-    setEmail(event.target.value);
-  }
+  // function updateEmail(event) {
+  //   const form = event.currentTarget;
+  //   if (form.checkValidity() === false) {
+  //     event.preventDefault();
+  //     event.stopPropagation();
+  //   }
+  //   setValidated(true);
+  //   setEmail(event.target.value);
+  // }
   function updateDepartment(event) {
     event.preventDefault();
     setDepartment(event.target.value);
@@ -59,11 +58,11 @@ export default function AlertForm() {
     setCourseNumber(event.target.value);
   }
 
-  useEffect(() => {
-    listClasses = classData.map((ele) => {
-      return <ShowClasses {...ele} />;
-    });
-  }, []);
+  // useEffect(() => {
+  //   listClasses = classData.map((ele) => {
+  //     return <ShowClasses {...ele} />;
+  //   });
+  // }, []);
 
   console.log(listAlert);
 
@@ -71,7 +70,7 @@ export default function AlertForm() {
     <>
       <div className="alert-form">
         <Form validated={validated} onSubmit={uploadForm}>
-          {listAlert.length != 0 && (
+          {listAlert.length !== 0 && (
             <>
               <ListChosenClasses listAlert={listAlert} />
               <AlertPage
@@ -113,10 +112,7 @@ export default function AlertForm() {
 
         {/* use Accordion */}
 
-        <Accordion>
-          {listClasses}
-          {}
-        </Accordion>
+        <Accordion>{listClasses}</Accordion>
       </div>
     </>
   );
