@@ -1,14 +1,16 @@
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
+import Badge from "react-bootstrap/Badge";
+
 import "./ShowClasses.css";
 
 export default function ShowClasses(props) {
   let btn;
   if (props.status === "FULL") {
-    btn = <Button variant="danger ">{props.status}</Button>;
+    btn = <Badge bg="danger ">{props.status}</Badge>;
   } else {
-    btn = <Button variant="success ">{props.status}</Button>;
+    btn = <Badge bg="primary ">{props.status}</Badge>;
   }
 
   return (
@@ -32,6 +34,20 @@ export default function ShowClasses(props) {
             Time: {props.meetings[0].days} {props.meetings[0].time}
           </p>
           <p>Code: {props.sectionCode}</p>
+          <Button
+            variant="success "
+            onClick={() => {
+              props.setListAlert((prev) => [
+                ...prev,
+                {
+                  sectionCode: props.sectionCode,
+                  instructors: props.instructors[0],
+                },
+              ]);
+            }}
+          >
+            Add
+          </Button>
         </Accordion.Body>
       </Accordion.Item>
     </div>

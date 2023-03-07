@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Accordion from "react-bootstrap/Accordion";
 import ShowClasses from "./ShowClasses";
+import AlertPage from "./AlertPage";
+import ListChosenClasses from "./ListChosenClasses";
 
 export default function AlertForm() {
   const [email, setEmail] = useState();
@@ -13,15 +15,19 @@ export default function AlertForm() {
   const [classData, setClassData] = useState([]);
   const [validated, setValidated] = useState(false);
 
+  const [listAlert, setListAlert] = useState([]);
+
   let listClasses = classData.map((ele) => {
-    return <ShowClasses key={ele.sectionCode} {...ele} />;
+    return (
+      <ShowClasses setListAlert={setListAlert} key={ele.sectionCode} {...ele} />
+    );
   });
 
   const peterPortalURL = "https://api.peterportal.org/rest/v0/schedule/soc?";
   async function getClass() {
     try {
       const result = await axios.get(
-        `${peterPortalURL}term=2023 Winter&department=${department}&courseNumber=${courseNumber}`
+        `${peterPortalURL}term=2023 Spring&department=${department}&courseNumber=${courseNumber}`
       );
       console.log(result.data.schools[0].departments[0].courses[0].sections);
       setClassData(result.data.schools[0].departments[0].courses[0].sections);
@@ -57,32 +63,34 @@ export default function AlertForm() {
     listClasses = classData.map((ele) => {
       return <ShowClasses {...ele} />;
     });
-  });
+  }, []);
+
+  console.log(listAlert);
 
   return (
     <>
       <div className="alert-form">
         <Form validated={validated} onSubmit={uploadForm}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              onChange={updateEmail}
-              type="email"
-              placeholder="Enter email"
-              required
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+          {listAlert.length != 0 && (
+            <>
+              <ListChosenClasses listAlert={listAlert} />
+              <AlertPage
+                department={department}
+                courseNumber={courseNumber}
+                listAlert={listAlert}
+              />
+            </>
+          )}
+
           <Form.Group className="mb-3">
+            <h2>Choose your Classes</h2>
             <Form.Label>Department</Form.Label>
             <Form.Select onChange={updateDepartment} required>
               <option value="">--Please choose an option--</option>
               <option value="I%26C SCI ">I&C SCI</option>
               <option value="WRITING">WRITING</option>
-              <option value="MATH">MATH</option>
-              <option value="ANTHRO">ANTHRO</option>
+              <option value="COMPSCI">COMPSCI</option>
+              <option value="INF">INF</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -95,7 +103,7 @@ export default function AlertForm() {
             />
           </Form.Group>
           <Button onClick={getClass} variant="success" type="submit">
-            +
+            Search
           </Button>
         </Form>
 
