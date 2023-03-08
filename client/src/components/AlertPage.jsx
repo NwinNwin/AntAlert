@@ -7,6 +7,7 @@ export default function AlertPage({ department, courseNumber, listAlert }) {
   const peterPortalURL = "https://api.peterportal.org/rest/v0/schedule/soc?";
   const [classData, setClassData] = useState([]);
   const [counter, setCounter] = useState(0);
+  const [opened, setOpened] = useState(0);
 
   async function getClass() {
     start();
@@ -30,6 +31,7 @@ export default function AlertPage({ department, courseNumber, listAlert }) {
     classData.forEach((e) => {
       if (c.sectionCode === e.sectionCode && e.status !== "FULL") {
         alert(`${c.instructors} is OPEN bitch!`);
+        setOpened((prev) => prev + 1);
       } else if (c.sectionCode === e.sectionCode) {
         console.log(e.status);
       }
@@ -41,6 +43,7 @@ export default function AlertPage({ department, courseNumber, listAlert }) {
   return (
     <>
       <h1>Counting: {counter}</h1>
+      <h2>Opened: {opened}</h2>
       <Button onClick={getClass}>Start Searching</Button>
     </>
   );
