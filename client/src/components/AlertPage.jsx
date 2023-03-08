@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 export default function AlertPage({ department, courseNumber, listAlert }) {
   const peterPortalURL = "https://api.peterportal.org/rest/v0/schedule/soc?";
   const [classData, setClassData] = useState([]);
+  const [counter, setCounter] = useState(0);
 
   async function getClass() {
     start();
@@ -18,6 +19,7 @@ export default function AlertPage({ department, courseNumber, listAlert }) {
           `${peterPortalURL}term=2023 Spring&department=${department}&courseNumber=${courseNumber}`
         );
         setClassData(result.data.schools[0].departments[0].courses[0].sections);
+        setCounter((prev) => prev + 1);
       } catch (err) {
         console.log(err);
       }
@@ -38,6 +40,7 @@ export default function AlertPage({ department, courseNumber, listAlert }) {
 
   return (
     <>
+      <h1>Counting: {counter}</h1>
       <Button onClick={getClass}>Start Searching</Button>
     </>
   );
