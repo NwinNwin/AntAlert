@@ -7,7 +7,7 @@ import Accordion from "react-bootstrap/Accordion";
 import ShowClasses from "./ShowClasses";
 import AlertPage from "./AlertPage";
 import ListChosenClasses from "./ListChosenClasses";
-import github from "./github.svg";
+// import github from "./github.svg";
 
 export default function AlertForm() {
   // const [email, setEmail] = useState();
