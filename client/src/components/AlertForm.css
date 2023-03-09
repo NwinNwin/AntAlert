@@ -1,3 +1,20 @@
 .alert-form {
   padding: 5% 25%;
 }
+
+.github {
+  height: 20%;
+}
+
+.gitlink {
+  text-decoration: none;
+}
+
+.gitout {
+  background-color: rgb(247, 126, 126);
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}

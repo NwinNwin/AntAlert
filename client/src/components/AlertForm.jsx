@@ -7,6 +7,7 @@ import Accordion from "react-bootstrap/Accordion";
 import ShowClasses from "./ShowClasses";
 import AlertPage from "./AlertPage";
 import ListChosenClasses from "./ListChosenClasses";
+import github from "./github.svg";
 
 export default function AlertForm() {
   // const [email, setEmail] = useState();
@@ -105,12 +106,6 @@ export default function AlertForm() {
             Search
           </Button>
         </Form>
-
-        {/* <Button className="mt-3" variant="danger" onClick={getClass}>
-          PRINT DATA
-        </Button> */}
-
-        {/* use Accordion */}
 
         <Accordion>{listClasses}</Accordion>
       </div>

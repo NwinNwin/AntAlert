@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./AlertForm.css";
 import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function AlertPage({ department, courseNumber, listAlert }) {
   const peterPortalURL = "https://api.peterportal.org/rest/v0/schedule/soc?";
@@ -42,9 +43,27 @@ export default function AlertPage({ department, courseNumber, listAlert }) {
 
   return (
     <>
-      <h1>Counting: {counter}</h1>
-      <h2>Opened: {opened}</h2>
-      <Button onClick={getClass}>Start Searching</Button>
+      <hr />
+      <h2>Counts: {counter}</h2>
+      <h4>Opened: {opened}</h4>
+      <p>Time: {counter * 3} secs</p>
+      {counter === 0 ? (
+        <Button variant="danger" onClick={getClass}>
+          Scan
+        </Button>
+      ) : (
+        <Button variant="primary" disabled>
+          <Spinner
+            as="span"
+            animation="border"
+            size="sm"
+            role="status"
+            aria-hidden="true"
+          />
+          <span className="visually-hidden">Loading...</span>
+        </Button>
+      )}
+      <hr />
     </>
   );
 }
