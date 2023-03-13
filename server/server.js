@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-async function createMail() {
+app.get("/", async function (req, res){
   const transporter = nodeMailer.createTransport({
     service: process.env.SERVICE,
     auth: {
@@ -31,4 +31,4 @@ async function createMail() {
     }
     console.log("Sent: " + info.response);
   });
-}
+})
