@@ -90,7 +90,7 @@ export default function AlertForm() {
               <option value="I%26C SCI ">I&C SCI</option>
               <option value="WRITING">WRITING</option>
               <option value="COMPSCI">COMPSCI</option>
-              <option value="INF">INF</option>
+              <option value="IN4MATX">INF</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
