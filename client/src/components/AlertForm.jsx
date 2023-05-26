@@ -28,7 +28,7 @@ export default function AlertForm() {
   async function getClass() {
     try {
       const result = await axios.get(
-        `${peterPortalURL}term=2023 Spring&department=${department}&courseNumber=${courseNumber}`
+        `${peterPortalURL}term=2023 Fall&department=${department}&courseNumber=${courseNumber}`
       );
       console.log(result.data.schools[0].departments[0].courses[0].sections);
       setClassData(result.data.schools[0].departments[0].courses[0].sections);
